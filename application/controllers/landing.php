@@ -19,7 +19,13 @@ class Landing extends CI_Controller {
 	 */
 	public function index()
 	{
+		//check session data if not logged in the show: 
+
 		$this->load->view('landing_page');
+
+		//else 
+			//show main page
+		$this->load->view('main/index');
 	}	
 	public function login()
 	{

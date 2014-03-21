@@ -49,10 +49,10 @@ $active_group = 'default';
 $active_record = FALSE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
+$db['default']['username'] = 'postgres';
 $db['default']['password'] = 'root';
-$db['default']['database'] = 'postgres_db';
-$db['default']['dbdriver'] = 'postgres';
+$db['default']['database'] = 'BetterBracket_DB';
+$db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
