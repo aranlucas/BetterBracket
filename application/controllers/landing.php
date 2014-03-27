@@ -9,7 +9,7 @@ class Landing extends CI_Controller {
 	 * 		http://example.com/index.php/welcome
 	 *	- or -  
 	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
+	 *	- or -	
 	 * Since this controller is set as the default controller in 
 	 * config/routes.php, it's displayed at http://example.com/
 	 *
@@ -20,33 +20,81 @@ class Landing extends CI_Controller {
 	public function index()
 	{
 		//check session data if not logged in the show: 
-
-		$this->load->view('landing_page');
-
-		//else 
+		$this->load->model('User_model');
+		if(!$this->User_model->_logged()) {
+			$this->load->view('landing_page');
+		}
+		else   {
 			//show main page
-		$this->load->view('main/index');
+			$this->load->view('main/index');
+		}
 	}	
 	public function login()
 	{
 
 		echo "Proccess User Login Info: \n";
-		var_dump($_POST);
-		//$this->load->view('auth/login');
 	}
 	public function register()
 	{
-		$this->load->view('auth/register');
-	}
+		//have the submitted a register form?
+		if(isset($_POST['first']) && isset($_POST['email']) && isset($_POST['password'])) {
 
-	private function _check_user($user, $pass) {
-		$result = $db->query("select * from users Where email=$user AND password = $pass limit 1");
-		if($result) {
-			//
-			$_SESSION['logged'] = true;
+			//load usr model for access user table db
+			$this->load->model('User_model');
+
+			//initial info in register form
+			// -- the data is sanitized in the user_model
+    		$first = $_POST['first'];
+    		$email = $_POST['email'];
+    		$password = $_POST['password'];
+
+    		//hash the password using email as the salt
+    		$hash = hash('sha256', $email.$password);
+
+    		//check if the email is already owned by another user
+    		if($this->User_model->exists('email',$email)) {
+    			echo "<h1>Email already exists in DB: ".$email."</h1>";
+    		}
+    		//email doesnt exist, lets create user
+			else if($result = $this->User_model->create(array($email, $hash), array('email','password'))) {
+				//since we have their first name we add a row for user_profile with their name
+
+				//the user was created, lets get the id of that user
+				$uid = $this->User_model->get_id($email);
+
+				//load usr model for access user table db
+				$this->load->model('Profile_model');
+
+
+				$result = $this->Profile_model->create(array($uid, $first), array('user_id','first'));
+				if(	!$result ){
+					echo "<h1>There was error creating user profile.</h1>";
+				}
+
+				//OK SO we have registered the user, lets log them in
+				$user_data = array(
+						'uid'   => $uid,
+						'email' => $email,
+						'hash'  => $hash
+						);
+				$uid = $this->session->set_userdata($user_data);
+				$this->load->view('main/index.php');
+			}
 		}
 	}
+	function logout() {
+		$this->session->unset_userdata('uid');
+		$this->session->unset_userdata('email');
+		$this->session->unset_userdata('hash');
+    }
+
+    function database() {
+    	$this->load->view('database_view');
+    }
+
+
+
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file landing.php */
+/* Location: ./application/controllers/landind.php */

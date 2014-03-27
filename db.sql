@@ -18,7 +18,8 @@ CREATE TABLE users
   email character varying(125),
   password character(256),
   date_joined timestamp without time zone DEFAULT statement_timestamp(),
-  CONSTRAINT users_table_pkey PRIMARY KEY (id)
+  CONSTRAINT users_table_pkey PRIMARY KEY (id),
+  CONSTRAINT emails UNIQUE(email)
 );
 ALTER SEQUENCE user_id_seq OWNED BY users.id;
 

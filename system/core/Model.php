@@ -26,6 +26,8 @@
  */
 class CI_Model {
 
+    public $table_name = false;
+
 	/**
 	 * Constructor
 	 *
@@ -50,6 +52,45 @@ class CI_Model {
 		$CI =& get_instance();
 		return $CI->$key;
 	}
+
+	function create($values,$columns = false) {
+        if($this->table_name != false) {
+           
+            $column_names = '';
+            if($columns !=false) {
+                $column_names .= "(";
+                foreach($columns as $name){
+                    $column_names .= $name.',';
+                }
+                $column_names = substr($column_names, 0, -1);
+                $column_names .= ") ";
+            }
+            $values_str = '';
+            foreach($values as $value){
+                $values_str .= "'".$this->db->escape_str($value)."',";
+            }
+            $values_str = substr($values_str, 0, -1);
+
+            $sql = 'INSERT INTO '.$this->table_name.' '.$column_names.' VALUES('.$values_str.');';
+            $query = $this->db->query($sql);
+            if($query) {
+                return true;
+            }
+        }
+    	return false;
+    }
+    
+    function exists($field, $value) {
+        if($this->table_name != false) {
+        	$sql  = "select 1 from ".$this->table_name." where $field = ? ;";
+        	if($result = $this->db->query($sql, array($value))) {
+        		if($result->num_rows==1)
+        			return true;
+        	}
+        }
+
+    	return false;	
+    }
 }
 // END Model Class
 

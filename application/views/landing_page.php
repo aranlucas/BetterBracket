@@ -40,6 +40,14 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 
+      <form class="form-signin" role="form" method="POST" action="index.php/landing/register">
+        <h2 class="form-signin-heading">Register Here: </h2>
+        <input type="text" name="first" class="form-control" placeholder="First Name" required>
+        <input type="email" name="email" class="form-control" placeholder="Email address" required>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+      </form>
+
     </div> <!-- /container -->
 
 
