@@ -55,6 +55,15 @@ class CI_Model {
 
 	function create($values,$columns = false) {
         if($this->table_name != false) {
+            $fields = $this->db->field_data($this->table_name);
+            $field_types = "";
+            foreach ($fields as $field)
+            {
+                $field_types['$field->name'] = $field->type;
+                echo '<pre>';
+                var_dump($field->name.$field->type);
+                echo '</pre>';
+            } 
            
             $column_names = '';
             if($columns !=false) {
