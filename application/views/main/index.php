@@ -53,9 +53,9 @@ $email = $this->session->userdata('email');
               <ul class="dropdown-menu">
                 <li><a href="#">My Picks</a></li>
                 <li><a href="#">Upcoming Games</a></li>
-                <li><a href="index.php/landing/viewPast">Past Games</a></li>
-                <li><a href="index.php/landing/database">DB Query</a></li>
-                <li><a href="index.php/landing/logout">Logout</a></li>
+                <li><a href="<?php echo base_url();?>landing/viewPast">Past Games</a></li>
+                <li><a href="<?php echo base_url();?>landing/database">DB Query</a></li>
+                <li><a href="<?php echo base_url();?>landing/logout">Logout</a></li>
               </ul>
             </li>
           </ul>
