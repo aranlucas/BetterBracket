@@ -8,7 +8,7 @@
     <meta name="author" content="Justin Schoeff, Lucas Arango, Jordan Farinas">
     <link rel="shortcut icon" href="<?php echo base_url();?>assets/ico/favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Better Bracket Sign-In</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">

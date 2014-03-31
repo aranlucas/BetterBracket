@@ -86,13 +86,16 @@ class Landing extends CI_Controller {
 		$this->session->unset_userdata('uid');
 		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('hash');
+		$this->load->view('landing_page');
     }
 
     function database() {
     	$this->load->view('database_view');
     }
 
-
+    function viewPast(){
+    	$this->load->view('past_games');
+    }
 
 }
 

@@ -52,4 +52,15 @@ class User_model extends CI_Model {
 
     }
 
+function get_name($email) {
+		$uid = $this->User_model->get_id($email);
+    	$sql  = "select first from users_profile where user_id = ? ;";
+    	if($result = $this->db->query($sql, array($uid))) {
+    		$row = $result->row();
+    		return $row->first;
+    	}
+
+    	return false;	
+
+    }
 }
