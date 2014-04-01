@@ -4,7 +4,8 @@
  */
 $error = true;
 $message = false;
-$q = false;
+if(isset($query))
+  $error = false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +54,7 @@ $q = false;
         }
         ?>
         <h1>Enter Query Below:</h1>
-        <form class="form" role="form" method="POST" action="index.php">
+        <form class="form" role="form" method="POST" action="<?php echo base_url()."landing/database"?>">
           <div class="form-group">
             <textarea name="query" class="form-control" rows="6"></textarea>
           </div>
@@ -67,7 +68,7 @@ $q = false;
             <div class="col-md-8">
             <?php  
             echo '<h4> Query Used: <small class="text-info">'.$q.'</small></h4>'."\n";
-            echo "<pre>"; var_dump($results); echo "</pre>"; 
+            echo "<pre>"; var_dump($query); echo "</pre>"; 
             ?>
             </div>
         </div>

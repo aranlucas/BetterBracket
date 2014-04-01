@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
-$sql  = "select team_name, score, score_2, date_played from GamesScores";
+//$sql  = "select team_name, score, score_2, date_played from GamesScores";
+$sql  = "select a.team_name,b.team_name, a.score, a.score_2, a.date_played from GamesScores a,GamesScores b WHERE a.id=b.id AND a.team_name != b.team_name ORDER BY date_played ASC;";
 $query = $this->db->query($sql);
 $result = $query->result_array();
 $i = 1;

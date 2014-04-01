@@ -21,7 +21,7 @@ class Landing extends CI_Controller {
 	{
 		//check session data if not logged in the show: 
 		$this->load->model('User_model');
-		if(!$this->User_model->_logged()) {
+		if(!$this->User_model->logged()) {
 			$this->load->view('landing_page');
 		}
 		else   {
@@ -31,8 +31,8 @@ class Landing extends CI_Controller {
 	}	
 	public function login()
 	{
-
-		echo "Proccess User Login Info: \n";
+		$this->load->model('User_model');
+		$this->User_model->login();
 	}
 	public function register()
 	{
@@ -90,10 +90,20 @@ class Landing extends CI_Controller {
     }
 
     function database() {
-    	$this->load->view('database_view');
+    	$queries = array(
+    		$user_info => "SELECT * from users,users_profile WHERE users.id=users_profile.user_id"
+    		);
+    	$data = array();
+    	if(isset($_POST['query'])) {
+    		$query = $this->db->query($_POST['query']);
+			$data['query'] = $query->result_array();
+			$data['q']     = $_POST['query'];
+  	 	}
+    	$this->load->view('database_view',$data);
     }
 
     function viewPast(){
+
     	$this->load->view('past_games');
     }
 

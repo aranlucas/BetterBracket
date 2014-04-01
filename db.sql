@@ -672,4 +672,5 @@ VALUES(
 
 
 CREATE VIEW TeamsGames as select team_name, date_played, a.id from (select * from games) as a inner join (select * from teams) as b on b.id = a.team_id_1 OR b.id = a.team_id_2;--Relation between Games and Teams, without scores
-CREATE VIEW GamesScores as select * from TeamsGames join (select * from scores)as a on GamesNames.id = a.game_id; --Relation between Games, Scores, and Teams to give the Teams that played which game whith what score
+
+CREATE VIEW GamesScores as select * from TeamsGames join (select * from scores) as a on TeamsGames.id = a.game_id; --Relation between Games, Scores, and Teams to give the Teams that played which game whith what score
