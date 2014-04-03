@@ -19,8 +19,8 @@
               <ul class="dropdown-menu">
                 <li><a href="#">Create Group</a></li>
                 <li><a href="#">Join Group</a></li>
-                <li><a href="<?php echo base_url();?>group/create_bracket">Create Bracket</a></li>
-                <li><a href="<?php echo base_url();?>group">View Bracket</a></li>
+                <li><a href="<?php echo base_url();?>groups/create_bracket">Create Bracket</a></li>
+                <li><a href="<?php echo base_url();?>groups/viewAllGroups">View All Groups</a></li>
               </ul>
             </li>
             <li class="dropdown">

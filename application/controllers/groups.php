@@ -16,12 +16,15 @@ class Groups extends CI_Controller {
 		}
 	}	
 
+	public function create_bracket() {
+		$this->load->view('groups/create_bracket');
+	}
 
-	function viewAllGroups()
+	function viewallgroups()
 	{
 		$this->load->model('User_model');
 		$data = $this->User_model->getAllGroups();
-		$this->load->view('view_all_groups', $data);
+		$this->load->view('groups/view_all_groups', $data);
 	}
 
     function addgroup() {
@@ -61,7 +64,7 @@ class Groups extends CI_Controller {
 		$this->viewGroup();
     }
 
-    function viewGroup()
+    function viewgroup()
     {
     	$id = $_GET['id'];
     	$data["gid"] = $id;
@@ -72,7 +75,7 @@ class Groups extends CI_Controller {
     	$data['gprof'] = $this->Group_model->getProfile($id);
     	//Find all member of a given group
     	$data['gmemb'] = $this->Group_model->findAllUsers($id);
-    	$this->load->view('view_group', $data);
+    	$this->load->view('groups/view_group', $data);
     }
 }
 
