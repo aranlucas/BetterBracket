@@ -89,4 +89,14 @@ function get_name($email) {
     	return false;	
 
     }
+
+
+    function getAllGroups()
+    {
+    	$uid =$this->session->userdata('uid');
+    	$sql = "select * from groups where id = ANY(select group_id from user_groups where user_id = ?);";
+    	$query = $this->db->query($sql, array($uid));
+		$data['query'] = $query->result_array();
+		return $data;
+    }
 }

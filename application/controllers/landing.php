@@ -103,8 +103,11 @@ class Landing extends CI_Controller {
     }
 
     function viewPast(){
-
-    	$this->load->view('past_games');
+    	$sql  = "select a.team_name,b.team_name, a.score, a.score_2, a.date_played from GamesScores a,GamesScores b WHERE a.id=b.id AND a.team_name != b.team_name ORDER BY date_played ASC;";
+		$query = $this->db->query($sql);
+		$result = $query->result_array();
+		$data['games'] = $result;
+    	$this->load->view('past_games', $data);
     }
 
 }

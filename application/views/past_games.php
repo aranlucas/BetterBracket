@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <?php
-//$sql  = "select team_name, score, score_2, date_played from GamesScores";
-$sql  = "select a.team_name,b.team_name, a.score, a.score_2, a.date_played from GamesScores a,GamesScores b WHERE a.id=b.id AND a.team_name != b.team_name ORDER BY date_played ASC;";
-$query = $this->db->query($sql);
-$result = $query->result_array();
 $i = 1;
 print "<h4 align = 'center'><font face='lucida console' size='4'>Games Played from March 20th, 2014 to March 27th, 2014</font></h4>";
 print " <table class ='TFtable' align = 'center'><th colspan='2'>Teams</th><th>Score</th><th>Date</th>";
-foreach($result as $row){
+foreach($games as $row){
 	if ($i % 2 === 0) 
 	{
 		print "</td><td align = 'center'>".$row['team_name']."</td><td align = 'center'>".$row['score_2']."-".$row['score']."</td><td align = 'center'>".$row['date_played']."</td></tr>";
@@ -19,7 +15,6 @@ foreach($result as $row){
     $i++;
 }
 print "</table>";
-
 
 ?>
 <html lang="en">
@@ -59,4 +54,6 @@ print "</table>";
 	}
 }
   </style>
+  <a href="<?php echo base_url();?>" style="position: fixed; bottom: 0; text-align: center">Back to Home</a>
+
   </html>

@@ -51,7 +51,7 @@ $email = $this->session->userdata('email');
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">My Picks</a></li>
+                <li><a href="<?php echo base_url();?>groups/viewAllGroups">My Groups</a></li>
                 <li><a href="#">Upcoming Games</a></li>
                 <li><a href="<?php echo base_url();?>landing/viewPast">Past Games</a></li>
                 <li><a href="<?php echo base_url();?>landing/database">DB Query</a></li>
