@@ -27,7 +27,7 @@ function(){
 <p><?php 
 if($query){
 	foreach($query as $group){
-		print "<p><b>GROUP:</b><a href=".base_url()."groups/viewGroup?id=".$group['id'].">".$group['name']."</p></a>";
+		print "<p><b>GROUP:</b><a href=".base_url()."groups/viewGroup/".$group['id'].">".$group['name']."</p></a>";
 	}
 }?>
 </p>

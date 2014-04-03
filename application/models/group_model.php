@@ -39,4 +39,19 @@ class Group_model extends CI_Model {
         $query = $this->db->query($sql,array($id));
         return $query->result_array();
     }
+
+    function checkMember($id, $email)//Check if member is already a part of the group
+    {
+        $this->load->model('User_model');
+        $uid = $uid = $this->User_model->get_id($email);
+        $sql = "select count(1) from user_groups where group_id = ? and user_id = ?;";
+        $query = $this->db->query($sql,array($id, $uid));
+        $data = $query->result_array();
+        if(((int)$data[0]['count']) < 1)//not found in group, ok to add
+        {
+            return false;
+        }
+        return true;
+
+    }
 }

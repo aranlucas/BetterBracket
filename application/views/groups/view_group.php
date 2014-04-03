@@ -37,7 +37,7 @@ print "<p>".$member['first']."</p>";
 }
 ?></p>
 <button>Add Member to Group</button>
-<form action ="<?php echo base_url();?>groups/addmember?id=<?php echo $gid;?>" method="post">
+<form action ="<?php echo base_url();?>groups/addmember/<?php echo $gid;?>" method="post">
 Member Email: <input type="text" name="memberemail"><br>
 <p></p>
 <input type="submit" value="Add Member">
