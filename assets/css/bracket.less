@@ -1,0 +1,36 @@
+@game-height: 50px;
+.bracket {
+	background-color:rgb(39,40,44);
+	font-size:.7em;
+	margin:0;
+	color:#eee;
+	.round {
+		/*background-color:red;*/
+		padding: 0px;
+
+		.game {
+			border:1px solid #9c9c9c;
+			height:@game-height;
+			margin-top:2px;	
+		}
+		.split-game {
+			border:1px solid #9c9c9c;
+			height:@game-height/2;
+		}
+		.team {
+			height:@game-height/2;
+		}
+		.filler-game {
+			height:@game-height;
+			display:block;
+		}
+		.filler-half {
+			height:@game-height/2;
+			display:block;
+		}
+		.filler100 {
+			height:@game-height*2;
+			float:left;
+		}
+	}
+}

@@ -91,7 +91,7 @@ class Landing extends CI_Controller {
 
     function database() {
     	$queries = array(
-    		$user_info => "SELECT * from users,users_profile WHERE users.id=users_profile.user_id"
+    		'user_info' => "SELECT * from users,users_profile WHERE users.id=users_profile.user_id"
     		);
     	$data = array();
     	if(isset($_POST['query'])) {

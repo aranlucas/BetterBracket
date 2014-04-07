@@ -39,4 +39,10 @@ class Group_model extends CI_Model {
         $query = $this->db->query($sql,array($id));
         return $query->result_array();
     }
+
+    function get_bracket() {
+
+        $query = $this->db->query("select * from bracket_teams WHERE round = 1");
+        return $query->result_array();
+    }
 }

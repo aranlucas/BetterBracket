@@ -5,320 +5,133 @@ $email = $this->session->userdata('email');
 
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
 
-<title>Better Bracket Home Page</title>
-
-<!-- Bootstrap core CSS -->
-<link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="navbar-fixed-top.css" rel="stylesheet">
-
+    <?php $this->load->view('template/header_files');?>
 <link href="<?php echo base_url();?>assets/css/bracket.css" rel="stylesheet">
-
-
-
-<!-- Just for debugging purposes. Don't actually copy this line! -->
-<!--[if lt IE 9]><script src="<?php echo base_url();?>assets/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 
 <body>
 
-    <?php $this->load->view('main/navbar');?>
+    <?php $this->load->view('template/navbar');?>
 
-    <div class="container">
+    <div class="container-fluid">
 
         <br><br><br>
-        <table class="table bracket"> 
-            <tbody>
-                <tr>
-                    <th>Round of 64</th>
-                    <th>Round of 32</th>
-                    <th>Sweet 16</th>
-                    <th>Elite 8</th>
-                    <th>Final Four</th>
-                    <th>Championship</th>
-                    <th>Final Four</th>
-                    <th>Elite 8</th>
-                    <th>Sweet 16</th>
-                    <th>Round of 32</th>
-                    <th>Round of 64</th>
-                </tr>
-<?php
-    $endl = "\n";
-    $tabs = "\t\t\t\t\t\t\t";
-    $round2_blank = 1;
-    for($x =1; $x < 33; $x++) {
-        echo "\t\t\t\t\t\t<tr>\n";
-        for($r=0; $r < 11; $r++){
-            echo $tabs.'<td>';
-            //round 1 (of 64)
-            if($r == 0 || $r == 10) {
-              echo "team".($r == 10 ? $x+32 : $x);
-            }
 
-            //round 2 (of32)
-            if($r == 1 || $r == 9) {
-                if($round2_blank > 1)
-              echo " winner of team".($r == 9 ? $x+32 : $x);                
+                <div class="row">
+                    <div class="col-md-1">Round of 64</div>
+                    <div class="col-md-1">Round of 32</div>
+                    <div class="col-md-1">Sweet 16</div>
+                    <div class="col-md-1">Elite 8</div>
+                    <div class="col-md-1">Final Four</div>
+                    <div class="col-md-1">Championship</div>
+                    <div class="col-md-1">Championship</div>
+                    <div class="col-md-1">Final Four</div>
+                    <div class="col-md-1">Elite 8</div>
+                    <div class="col-md-1">Sweet 16</div>
+                    <div class="col-md-1">Round of 32</div>
+                    <div class="col-md-1">Round of 64</div>
+                </div>
+        <div class="bracket row">
+            <?php
+      
+$counts = array(
+    1=>1,
+    2=>1,
+    3=>1,
+    4=>1,
+    5=>1
+    );
+$games = array(
+    array("fillergame for index 0")
+    ,array(1,16)
+    ,array(8,9)
+    ,array(5,12)
+    ,array(4,13)
+    ,array(6,11)
+    ,array(3,14)
+    ,array(7,10)
+    ,array(2,15) );
+for($a = 1; $a< 4; $a+=2) {
+    $game_counts = array(8,4,2,1,1,0,0,0);
+    for ($i=1; $i < 13; $i++) { 
+        echo '<div id="round'.(($i<5)? $i : 12-$i +1).'" class="round col-md-1">';
+        $count = ($i<6)?$game_counts[$i-1]+1:$game_counts[12-$i]+1;
+        for ($j=1; $j < $count; $j++) { 
+            
+            //calculate filler space for different round
+            $round = ($i<6)? $i : 12-$i +1;
+            $region = ($i<6)? $a : $a+1;
+            //round 2
+            if($round==2 ) {
+                echo '<div id="" class="filler-'.($j==1?"half":"game").'"></div>';
             }
-            echo '</td>'.$endl;
+            //round 3
+            if($round==3 ) {
+                if($j==1) {
+                    echo '<div id="" class="filler-half"></div>';
+                    echo '<div id="" class="filler-game"></div>';
+                }
+                else {
+                    echo '<div id="" class="filler-game"></div>';
+                    echo '<div id="" class="filler-game"></div>';
+                    echo '<div id="" class="filler-game"></div>';
+                }
+            }
+            //round 4
+            if($round==4 ) {
+                    echo '<div id="" class="filler-half"></div>';
+                    echo '<div id="" class="filler-game"></div>';
+                    echo '<div id="" class="filler-game"></div>';
+                    echo '<div id="" class="filler-game"></div>';
+            }
+            //round 5
+            if($round==5 ) {
+                    if($a == 1) {
+                        echo '<div id="" class="filler-half"></div>';
+                        echo '<div id="" class="filler-game"></div>';
+                        echo '<div id="" class="filler-game"></div>';
+                        echo '<div id="" class="filler-game"></div>';
+                        echo '<div id="" class="filler-game"></div>';
+                        echo '<div id="" class="filler-game"></div>';
+                        echo '<div id="" class="filler-game"></div>';
+                        echo '<div id="" class="filler-game"></div>';
+                    }
+                    echo '<div id="" class="split-game">';
+                    echo '<a href="#"><div id="team1" class="team">';
+                    echo '<p class="team-name"><em>'."".'</em>';
+                    echo ' round'.$round.'game'.$counts[$round].'team</p>';
+                    // echo ' round'.(($i<6)? $i : 12-$i +1).'game'.$j.'team';
+                    echo '</div></a>';
+                    echo '</div>';
+                    $counts[$round]++;
+
+
+            }
+            if($round != 5) {
+                echo '<div id="game'.$j.'" class="game">';
+
+                for ($c=0; $c < 2; $c++) { 
+                    echo '<a href="#"><div id="team1" class="team">';
+
+                    echo '<p class="team-name"><strong>'.$games[$counts[$round]][$c].'</strong> ';
+                    echo $bracket[$region][$games[$counts[$round]][$c]]['team_name'].'</p>';
+                    // echo ' round'.$round.'game'.$counts[$round].'</p>';
+                    // echo ' round'.(($i<6)? $i : 12-$i +1).'game'.$j.'team';
+                    echo '</div></a>';
+                }
+                echo '</div>';
+                $counts[$round]++;
+            }
+                       
         }
-
-        $round2_blank++;
-        if( $round2_blank == 4)
-        $round2_blank = 0;
-
+        
+            $counts[$round] =1;            
+        echo '</div>';
     }
-
-?>
-            </tbody>
-            <!-- 8 team block --> 
-            <!-- game block -->
-            <tbody class="game">
-                <tr>
-                    <td>Home Team1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Home Team</td>
-                </tr>
-                <tr>
-                    <td>Away Team1</td>
-                    <td class="round32">Winner of Game 1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="round32">Winner of Game 1<br> region 2</td>
-                    <td>Away Team</td>
-                </tr>
-            </tbody>
-            <tbody class="game">
-                <tr>
-                    <td>Home Team2</td>
-                    <td class="round32">Winner of Game 2</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="round32">Winner of Game 2<br> region 2</td>
-                    <td>Home Team</td>
-                </tr>
-                <tr>
-                    <td>Away Team2</td>
-                    <td></td>
-                    <td class="round16">Winner of round 32 game 1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="round16">Winner of round 32 game 2</td>
-                    <td></td>
-                    <td>Away Team</td>
-                </tr>
-            </tbody>
-            <!-- end game block 1-->
-            <!-- game block 2-->
-            <tbody class="game">
-                <tr>
-                    <td>Home Team</td>
-                    <td></td>
-                    <td class="round16">Winner of round 32 game 2</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="round16">Winner of round 32 game 2</td>
-                    <td></td>
-                    <td>Home Team</td>
-                </tr>
-                <tr>
-                    <td>Away Team</td>
-                    <td>Winner of Game 1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Winner of Game 1<br> region 2</td>
-                    <td>Away Team</td>
-                </tr>
-            </tbody>
-            <tbody class="game">
-                <tr>
-                    <td>Home Team</td>
-                    <td>Winner of Game 2</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Winner of Game 2<br> region 2</td>
-                    <td>Home Team</td>
-                </tr>
-                <tr>
-                    <td>Away Team</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Away Team</td>
-                </tr>
-            </tbody>
-            <!-- end game block -->
-            <!-- 8 team block --> 
-            <!-- game block -->
-            <tbody class="game">
-                <tr>
-                    <td>Home Team1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Home Team</td>
-                </tr>
-                <tr>
-                    <td>Away Team1</td>
-                    <td class="round32">Winner of Game 1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="round32">Winner of Game 1<br> region 2</td>
-                    <td>Away Team</td>
-                </tr>
-            </tbody>
-            <tbody class="game">
-                <tr>
-                    <td>Home Team2</td>
-                    <td class="round32">Winner of Game 2</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="round32">Winner of Game 2<br> region 2</td>
-                    <td>Home Team</td>
-                </tr>
-                <tr>
-                    <td>Away Team2</td>
-                    <td></td>
-                    <td class="round16">Winner of round 32 game 1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="round16">Winner of round 32 game 2</td>
-                    <td></td>
-                    <td>Away Team</td>
-                </tr>
-            </tbody>
-            <!-- end game block 1-->
-            <!-- game block 2-->
-            <tbody class="game">
-                <tr>
-                    <td>Home Team</td>
-                    <td></td>
-                    <td class="round16">Winner of round 32 game 2</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="round16">Winner of round 32 game 2</td>
-                    <td></td>
-                    <td>Home Team</td>
-                </tr>
-                <tr>
-                    <td>Away Team</td>
-                    <td>Winner of Game 1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Winner of Game 1<br> region 2</td>
-                    <td>Away Team</td>
-                </tr>
-            </tbody>
-            <tbody class="game">
-                <tr>
-                    <td>Home Team</td>
-                    <td>Winner of Game 2</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Winner of Game 2<br> region 2</td>
-                    <td>Home Team</td>
-                </tr>
-                <tr>
-                    <td>Away Team</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Away Team</td>
-                </tr>
-            </tbody>
-        <!-- end game block -->
-        </table>
+}
+            ?>
+        </div>
 
     </div> <!-- /container -->
 

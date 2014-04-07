@@ -1,6 +1,34 @@
 .bracket {
-	background-color:#fff;
+  background-color: #27282c;
+  font-size: .7em;
+  margin: 0;
+  color: #eee;
 }
-.bracket th,td {
-	padding:.5em;
+.bracket .round {
+  /*background-color:red;*/
+  padding: 0px;
+}
+.bracket .round .game {
+  border: 1px solid #9c9c9c;
+  height: 50px;
+  margin-top: 2px;
+}
+.bracket .round .split-game {
+  border: 1px solid #9c9c9c;
+  height: 25px;
+}
+.bracket .round .team {
+  height: 25px;
+}
+.bracket .round .filler-game {
+  height: 50px;
+  display: block;
+}
+.bracket .round .filler-half {
+  height: 25px;
+  display: block;
+}
+.bracket .round .filler100 {
+  height: 100px;
+  float: left;
 }

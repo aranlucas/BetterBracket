@@ -53,17 +53,10 @@ class CI_Model {
 		return $CI->$key;
 	}
 
-	function create($values,$columns = false) {
+	function create($values, $columns = false) {
         if($this->table_name != false) {
-            $fields = $this->db->field_data($this->table_name);
-            $field_types = "";
-            foreach ($fields as $field)
-            {
-                $field_types['$field->name'] = $field->type;
-                echo '<pre>';
-                var_dump($field->name.$field->type);
-                echo '</pre>';
-            } 
+
+            
            
             $column_names = '';
             if($columns !=false) {
@@ -81,6 +74,9 @@ class CI_Model {
             $values_str = substr($values_str, 0, -1);
 
             $sql = 'INSERT INTO '.$this->table_name.' '.$column_names.' VALUES('.$values_str.');';
+            echo '<pre>';
+            var_dump($sql);
+            echo '</pre>';
             $query = $this->db->query($sql);
             if($query) {
                 return true;
