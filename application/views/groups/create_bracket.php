@@ -114,12 +114,12 @@ $email = $this->session->userdata('email');
 
                 for ($c=0; $c < 2; $c++) {
                 	/*region-round-game-teamdid */
-                    $identifier = $region.'-'.$round.'-'.$bracket[$region][$games[$counts[$round]][$c]]['team_id'];
+                    $identifier = $region.'-'.$round.'-'.$j.'-'.$bracket[$region][$games[$counts[$round]][$c]]['team_id'];
                     echo '<a href="#"><div id="'.$identifier.'" class="team">';
                     //echo '<a href="#"><div id="team1" class="team">';
 
-                    echo '<p class="team-name"><strong>'.( $round ==1 ? $games[$counts[$round]][$c] : "").'</strong> ';
-                    echo ($round == 1? $bracket[$region][$games[$counts[$round]][$c]]['team_name'] : "").'</p>';
+                    echo '<strong class="seed">'.( $round ==1 ? $games[$counts[$round]][$c] : "").'</strong> ';
+                    echo '<p class="team_name">'.($round == 1? $bracket[$region][$games[$counts[$round]][$c]]['team_name'] : "").'</p>';
                     // echo ' round'.$round.'game'.$counts[$round].'</p>';
                     // echo ' round'.(($i<6)? $i : 12-$i +1).'game'.$j.'team';
                     echo '</div></a>';
@@ -141,11 +141,7 @@ $email = $this->session->userdata('email');
 	<!-- /container -->
 
 
-	<!-- Bootstrap core JavaScript
-        ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+	<?php $this->load->view('template/footer_scripts'); ?>
+	<script src="<?php echo base_url();?>assets/js/bracket.js"></script>
 </body>
 </html>

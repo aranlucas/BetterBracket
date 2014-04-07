@@ -60,12 +60,9 @@ $this->load->view('template/header_files',$data);
 		<!--/row-->
 	</div>
 
-	</div>
-
-
-
 	<!-- /container -->
 
+<?php $this->load->view('template/footer_scripts'); ?>
 
 
 </body>
