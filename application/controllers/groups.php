@@ -54,9 +54,10 @@ class Groups extends CI_Controller {
 		$this->viewAllGroups();
     }
 
-    function addmember() {
-		$id = $_GET['id'];
-    	if(isset($_POST['memberemail']))//We have a group name to create a Group for
+    function addmember($id) {
+		$this->load->model('Group_model');
+		//var_dump((int)$this->Group_model->checkMember($id,$_POST['memberemail']));
+    	if(isset($_POST['memberemail']) && !($this->Group_model->checkMember($id,$_POST['memberemail'])))//We have a group name to create a Group for
 		{
 			$this->load->model('User_model');
 			$uid = $this->User_model->get_id($_POST['memberemail']);//id of user by email if exists
@@ -69,12 +70,11 @@ class Groups extends CI_Controller {
 			$query = $this->db->query($sql,array($id, $uid));//we now have a new user in our group
 			}
 		}
-		$this->viewGroup();
+		$this->viewGroup($id);
     }
 
-    function viewgroup()
+    function viewgroup($id)
     {
-    	$id = $_GET['id'];
     	$data["gid"] = $id;
     	//Group information from groups table
     	$this->load->model('Group_model');
