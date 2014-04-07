@@ -3,23 +3,14 @@
 //var_dump($gmemb);
 ?>
 
-
 <html lang="en">
-<title>View Group Page</title>
-<link href="<?php echo base_url();?>assets/css/bootstrap.min.css"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script>
-$(document).ready(
-function(){
-  $('form').hide()
-  $("button").click(function(){
-    $("form").toggle();
-  });
-}
-);
-</script>
+	<head>
+		<?php
+		$data['title'] = " BB : View Group";
+		$this->load->view('template/header_files',$data);
+		?>
+
+	</head>
 
 <body>
 	<?php $this->load->view('template/navbar');?>
@@ -52,5 +43,18 @@ print "<p>".$member['first']."</p>";
 
 	<a href="<?php echo base_url();?>groups/"
 		style="position: fixed; bottom: 0; text-align: center">Back to Groups</a>
+		
+<!-- custom script -->
+<script>
+		$(document).ready(
+		function(){
+		  $('form').hide()
+		  $("button").click(function(){
+		    $("form").toggle();
+		  });
+		}
+		);
+		</script>
 </body>
+
 </html>
