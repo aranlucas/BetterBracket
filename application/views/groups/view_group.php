@@ -44,8 +44,9 @@ print "<p>".$member['first']."</p>";
 	<a href="<?php echo base_url();?>groups/"
 		style="position: fixed; bottom: 0; text-align: center">Back to Groups</a>
 		
-<!-- custom script -->
-<script>
+
+<?php $this->load->view('template/footer_scripts'); ?>
+<!-- custom script --><script>
 		$(document).ready(
 		function(){
 		  $('form').hide()
