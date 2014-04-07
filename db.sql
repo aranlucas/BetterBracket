@@ -16,7 +16,7 @@ CREATE TABLE users
 (
   id integer NOT NULL DEFAULT nextval('user_id_seq'),
   email character varying(125),
-  password varchar(256),
+  password character(256),
   date_joined timestamp without time zone DEFAULT statement_timestamp(),
   CONSTRAINT users_table_pkey PRIMARY KEY (id),
   CONSTRAINT emails UNIQUE(email)
@@ -674,34 +674,3 @@ VALUES(
 CREATE VIEW TeamsGames as select team_name, date_played, a.id from (select * from games) as a inner join (select * from teams) as b on b.id = a.team_id_1 OR b.id = a.team_id_2;--Relation between Games and Teams, without scores
 
 CREATE VIEW GamesScores as select * from TeamsGames join (select * from scores) as a on TeamsGames.id = a.game_id; --Relation between Games, Scores, and Teams to give the Teams that played which game whith what score
-
-/*bracket Teams:
-- takes games and teams and creates a row for each team but gives the teamname and id and date played. 
-- then from that using the dates played i give them a round1-6
-- then UNION them all to make one big table
--Fields: team id, name, region, seed and round
-*/
-
-CREATE VIEW bracket_teams as (
-with bracket_games as (
-SELECT teams.id as team_id, team_name,seed,region,date_played from games,teams WHERE games.team_id_1 = teams.id
-UNION
-SELECT teams.id as team_id, team_name,seed,region,date_played from games,teams WHERE games.team_id_2 = teams.id ORDER BY seed ASC),
-round1 as (SELECT 1 as round,team_id, team_name,seed,region from bracket_games where date_played = '2014-03-20' OR date_played = '2014-03-21'),
-round2 as (SELECT 2 as round,team_id, team_name,seed,region from bracket_games where date_played = '2014-03-22' OR date_played = '2014-03-23'),
-round3 as (SELECT 2 as round,team_id, team_name,seed,region from bracket_games where date_played = '2014-03-27' OR date_played = '2014-03-28'),
-round4 as (SELECT 2 as round,team_id, team_name,seed,region from bracket_games where date_played = '2014-03-29' OR date_played = '2014-03-30'),
-round5 as (SELECT 2 as round,team_id, team_name,seed,region from bracket_games where date_played = '2014-04-05'),
-round6 as (SELECT 2 as round,team_id, team_name,seed,region from bracket_games where date_played = '2014-04-07')
-
-select * from round1
-UNION
-select * from round2
-UNION 
-select * from round3
-UNION 
-select * from round4
-UNION 
-select * from round5
-UNION 
-select * from round6);

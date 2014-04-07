@@ -7,10 +7,10 @@ class Landing extends CI_Controller {
 	 *
 	 * Maps to the following URL
 	 * 		http://example.com/index.php/welcome
-	 *	- or -  
+	 *	- or -
 	 * 		http://example.com/index.php/welcome/index
-	 *	- or -	
-	 * Since this controller is set as the default controller in 
+	 *	- or -
+	 * Since this controller is set as the default controller in
 	 * config/routes.php, it's displayed at http://example.com/
 	 *
 	 * So any other public methods not prefixed with an underscore will
@@ -19,7 +19,7 @@ class Landing extends CI_Controller {
 	 */
 	public function index()
 	{
-		//check session data if not logged in the show: 
+		//check session data if not logged in the show:
 		$this->load->model('User_model');
 		if(!$this->User_model->logged()) {
 			$this->load->view('landing_page');
@@ -28,7 +28,7 @@ class Landing extends CI_Controller {
 			//show main page
 			$this->load->view('main/index');
 		}
-	}	
+	}
 	public function login()
 	{
 		$this->load->model('User_model');
@@ -37,25 +37,25 @@ class Landing extends CI_Controller {
 	public function register()
 	{
 		//have the submitted a register form?
-		if(isset($_POST['first']) && isset($_POST['email']) && isset($_POST['password'])) {
+		if(isset($_POST['first'])&& isset($_POST['last']) && isset($_POST['email']) && isset($_POST['password'])) {
 
 			//load usr model for access user table db
 			$this->load->model('User_model');
 
 			//initial info in register form
 			// -- the data is sanitized in the user_model
-    		$first = $_POST['first'];
-    		$email = $_POST['email'];
-    		$password = $_POST['password'];
+			$first = $_POST['first'];
+			$last = $_POST['last'];
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+			//hash the password using email as the salt
+			$hash = hash('sha256', $email.$password);
 
-    		//hash the password using email as the salt
-    		$hash = hash('sha256', $email.$password);
-
-    		//check if the email is already owned by another user
-    		if($this->User_model->exists('email',$email)) {
-    			echo "<h1>Email already exists in DB: ".$email."</h1>";
-    		}
-    		//email doesnt exist, lets create user
+			//check if the email is already owned by another user
+			if($this->User_model->exists('email',$email)) {
+				echo "<h1>Email already exists in DB: ".$email."</h1>";
+			}
+			//email doesnt exist, lets create user
 			else if($result = $this->User_model->create(array($email, $hash), array('email','password'))) {
 				//since we have their first name we add a row for user_profile with their name
 
@@ -76,7 +76,7 @@ class Landing extends CI_Controller {
 						'uid'   => $uid,
 						'email' => $email,
 						'hash'  => $hash
-						);
+				);
 				$uid = $this->session->set_userdata($user_data);
 				$this->load->view('main/index.php');
 			}
@@ -87,28 +87,31 @@ class Landing extends CI_Controller {
 		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('hash');
 		$this->load->view('landing_page');
-    }
+	}
 
-    function database() {
-    	$queries = array(
-    		'user_info' => "SELECT * from users,users_profile WHERE users.id=users_profile.user_id"
-    		);
-    	$data = array();
-    	if(isset($_POST['query'])) {
-    		$query = $this->db->query($_POST['query']);
+	function database() {
+		$queries = array('user_info' => "SELECT * from users,users_profile WHERE users.id=users_profile.user_id");
+		$data = array();
+		if(isset($_POST['query'])) {
+			$query = $this->db->query($_POST['query']);
 			$data['query'] = $query->result_array();
 			$data['q']     = $_POST['query'];
-  	 	}
-    	$this->load->view('database_view',$data);
-    }
+		}
+		$this->load->view('database_view',$data);
+	}
 
-    function viewPast(){
-    	$sql  = "select a.team_name,b.team_name, a.score, a.score_2, a.date_played from GamesScores a,GamesScores b WHERE a.id=b.id AND a.team_name != b.team_name ORDER BY date_played ASC;";
+	function viewPast(){
+		$sql  = "select a.team_name,b.team_name, a.score, a.score_2, a.date_played from GamesScores a,GamesScores b WHERE a.id=b.id AND a.team_name != b.team_name ORDER BY date_played ASC;";
 		$query = $this->db->query($sql);
 		$result = $query->result_array();
 		$data['games'] = $result;
-    	$this->load->view('past_games', $data);
-    }
+		$this->load->view('past_games', $data);
+	}
+
+	function profileView(){
+		$this->load->view('profile/index.php');
+
+	}
 
 }
 
