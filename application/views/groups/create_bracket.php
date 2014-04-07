@@ -113,10 +113,13 @@ $email = $this->session->userdata('email');
                 echo '<div id="game'.$j.'" class="game">';
 
                 for ($c=0; $c < 2; $c++) {
-                    echo '<a href="#"><div id="team1" class="team">';
+                	/*region-round-game-teamdid */
+                    $identifier = $region.'-'.$round.'-'.$bracket[$region][$games[$counts[$round]][$c]]['team_id'];
+                    echo '<a href="#"><div id="'.$identifier.'" class="team">';
+                    //echo '<a href="#"><div id="team1" class="team">';
 
-                    echo '<p class="team-name"><strong>'.$games[$counts[$round]][$c].'</strong> ';
-                    echo $bracket[$region][$games[$counts[$round]][$c]]['team_name'].'</p>';
+                    echo '<p class="team-name"><strong>'.( $round ==1 ? $games[$counts[$round]][$c] : "").'</strong> ';
+                    echo ($round == 1? $bracket[$region][$games[$counts[$round]][$c]]['team_name'] : "").'</p>';
                     // echo ' round'.$round.'game'.$counts[$round].'</p>';
                     // echo ' round'.(($i<6)? $i : 12-$i +1).'game'.$j.'team';
                     echo '</div></a>';
