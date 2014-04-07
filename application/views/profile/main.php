@@ -36,7 +36,10 @@ $this->load->view('template/header_files',$data);
 			<div class="col-md-4">
 				<h2>Name</h2>
 				<p>
-					<?php echo $this->User_model->get_name($email);?>
+					<?php 
+					$info =  $this->User_model->get_name($email);
+					print $info['first']." ".$info['last'];
+					?>
 				</p>
 
 				<h2>Email</h2>

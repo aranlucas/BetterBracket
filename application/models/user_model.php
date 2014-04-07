@@ -76,11 +76,14 @@ class User_model extends CI_Model {
 
 	function get_name($email) {
 		$uid = $this->get_id($email);
-		$sql  = "select first from users_profile where user_id = ? ;";
+		$sql  = "select first,last from users_profile where user_id = ? ;";
 		if($result = $this->db->query($sql, array($uid))) {
 			$row = $result->row();
-			return $row->first;
+			$info['first'] =  $row->first;
+			$info['last'] = $row->last;
+			return $info;
 		}
+
 
 		return false;
 

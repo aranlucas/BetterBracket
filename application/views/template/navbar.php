@@ -17,14 +17,15 @@
 				<li><a href="#about">About</a></li>
 				
 				<li class="dropdown"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown">Groups Stuff <b
+					class="dropdown-toggle" data-toggle="dropdown">Groups<b
 						class="caret"></b>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Create Group</a></li>
-						<li><a href="#">Join Group</a></li>
+						<li><a href="<?php echo base_url();?>groups/addgroup">Create Group</a></li>
 						<li><a href="<?php echo base_url();?>groups/create_bracket">Create
 								Bracket</a></li>
+						<li><a href="<?php echo base_url();?>groups/viewyourgroups">View
+								Your Groups</a></li>
 						<li><a href="<?php echo base_url();?>groups/viewAllGroups">View
 								All Groups</a></li>
 					</ul>

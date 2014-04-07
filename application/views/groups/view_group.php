@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-//var_dump($gmemb);
+$email  = $this->session->userdata('email');
 ?>
 
 <html lang="en">
@@ -34,24 +34,29 @@ print "<p>".$member['first']."</p>";
 	</p>
 	<button>Add Member to Group</button>
 	<form
-		action="<?php echo base_url();?>groups/addmember/<?php echo $gid;?>"
-		method="post">
-		Member Email: <input type="text" name="memberemail"><br>
+		action='<?php echo base_url();?>groups/addmember/<?php echo $gid;?>'
+		method='post' id = 'addmember'>
+		Member Email: <input type='text' name='memberemail'><br>
 		<p></p>
 		<input type="submit" value="Add Member">
 	</form>
-
-	<a href="<?php echo base_url();?>groups/"
-		style="position: fixed; bottom: 0; text-align: center">Back to Groups</a>
+	<p>
+	<form
+		action='<?php echo base_url();?>groups/addmember/<?php echo $gid;?>'
+		method='post'>
+		<input type ="hidden" name = 'memberemail' value = "<?php echo $email;?>">
+		<input type="submit" value="Join Group!">
+	</form>
+	</p>
 		
 
 <?php $this->load->view('template/footer_scripts'); ?>
 <!-- custom script --><script>
 		$(document).ready(
 		function(){
-		  $('form').hide()
+		  $('#addmember').hide()
 		  $("button").click(function(){
-		    $("form").toggle();
+		    $("#addmember").toggle();
 		  });
 		}
 		);

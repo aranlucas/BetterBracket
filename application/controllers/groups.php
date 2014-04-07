@@ -12,7 +12,7 @@ class Groups extends CI_Controller {
 		}
 		else   {
 			//show main page
-			$this->viewAllGroups();
+			$this->viewyourgroups();
 		}
 	}
 
@@ -28,11 +28,11 @@ class Groups extends CI_Controller {
 		$this->load->view('groups/create_bracket',$data);
 	}
 
-	function viewallgroups()
+	function viewyourgroups()
 	{
 		$this->load->model('User_model');
 		$data = $this->User_model->getAllGroups();
-		$this->load->view('groups/view_all_groups', $data);
+		$this->load->view('groups/view_your_groups', $data);
 	}
 
 	function addgroup() {
@@ -51,7 +51,8 @@ class Groups extends CI_Controller {
 			$sql3 = "insert into user_groups(group_id,user_id)values(?, ?);";//store in table relating users and groups
 			$this->db->query($sql3,array($id, $uid));
 		}
-		$this->viewAllGroups();
+		$this->load->view('groups/create_group');
+	
 	}
 
 	function addmember($id) {
@@ -84,5 +85,15 @@ class Groups extends CI_Controller {
 		//Find all member of a given group
 		$data['gmemb'] = $this->Group_model->findAllUsers($id);
 		$this->load->view('groups/view_group', $data);
+	}
+
+	function viewallgroups()
+	{
+		$sql = "select * from groups;";
+		$query = $this->db->query($sql);
+		$data["groups"] = $query->result_array();
+
+		$this->load->view('groups/view_all_groups', $data);
+
 	}
 }
