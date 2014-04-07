@@ -5,23 +5,13 @@
 
 
 <html lang="en">
-<title>View All Current Groups</title>
-<link href='<?php echo base_url();?>assets/css/bootstrap.min.css'
-	rel='stylesheet'>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<head>
+		<?php
+		$data['title'] = " BB : View All Current Groups";
+		$this->load->view('template/header_files',$data);
+		?>
 
-<script>
-$(document).ready(
-function(){
-  $('form').hide()
-  $("button").click(function(){
-    $("form").toggle();
-  });
-}
-);
-</script>
-
+	</head>
 
 <body>
 	<?php $this->load->view('template/navbar');?>
@@ -55,6 +45,17 @@ function(){
 			</form>
 		</div>
 	</div>
-
+<?php $this->load->view('template/footer_scripts'); ?>
+<!-- custom script -->
+<script>
+		$(document).ready(
+		function(){
+		  $('form').hide()
+		  $("button").click(function(){
+		    $("form").toggle();
+		  });
+		}
+		);
+		</script>
 </body>
 </html>
