@@ -14,11 +14,13 @@ $email = $this->session->userdata('email');
 <body>
 
 	<?php $this->load->view('template/navbar');?>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Create A Bracket</h1>
+		</div>
+	</div>
 
 	<div class="container-fluid">
-
-		<br> <br> <br>
-
 		<div class="row">
 			<div class="col-md-1">Round of 64</div>
 			<div class="col-md-1">Round of 32</div>
@@ -110,9 +112,9 @@ $email = $this->session->userdata('email');
 
 						}
 						if($round != 5) {
-                echo '<div id="game'.$j.'" class="game">';
+							echo '<div id="game'.$j.'" class="game">';
 
-                for ($c=0; $c < 2; $c++) {
+							for ($c=0; $c < 2; $c++) {
                 	/*region-round-game-teamdid */
                     $identifier = $region.'-'.$round.'-'.$j.'-'.$bracket[$region][$games[$counts[$round]][$c]]['team_id'];
                     echo '<a href="#"><div id="'.$identifier.'" class="team">';
@@ -126,8 +128,8 @@ $email = $this->session->userdata('email');
                 }
                 echo '</div>';
                 $counts[$round]++;
-            }
-             
+						}
+							
 					}
 
 					$counts[$round] =1;
@@ -143,5 +145,6 @@ $email = $this->session->userdata('email');
 
 	<?php $this->load->view('template/footer_scripts'); ?>
 	<script src="<?php echo base_url();?>assets/js/bracket.js"></script>
+
 </body>
 </html>

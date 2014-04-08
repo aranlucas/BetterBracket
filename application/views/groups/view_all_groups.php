@@ -17,19 +17,22 @@ $this->load->view('template/header_files',$data);
 	<div class="container">
 
 		<div class="jumbotron">
-			<h3>All Groups:</h3>
-			<p>
-				<?php 
-				if($groups){
+			<h1>All Groups</h1>
+		</div>
+	</div>
+	<div class="container">
+
+		<p>
+			<?php 
+			if($groups){
 					foreach($groups as $group){
 						print "<p><b>GROUP:</b><a href=".base_url()."groups/viewGroup/".$group['id'].">".$group['name']."</p></a>";
 							}
 							}
 							?>
-			</p>
-
-		</div>
+		</p>
 	</div>
+
 	<?php $this->load->view('template/footer_scripts'); ?>
 	<!-- custom script -->
 	<script>
@@ -42,5 +45,6 @@ $this->load->view('template/header_files',$data);
 		}
 		);
 		</script>
+
 </body>
 </html>

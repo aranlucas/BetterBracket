@@ -34,8 +34,7 @@
 
 	<div class="container">
 		<div class="col-md-3">
-			<img src="<?php echo base_url("/assets/images/logo.png"); ?>"
-				alt="StackOverflow" title="StackOverflow is the best!" />
+			<img src="<?php echo base_url("/assets/images/logo.png"); ?>" />
 		</div>
 		<div class="col-md-offset-6 col-md-3">
 			<div class="row">

@@ -24,16 +24,26 @@ $this->load->view('template/header_files',$data);
 }?>
 			<h1>Create a Group</h1>
 
-			<button>Create a Group</button>
-			<form action="<?php echo base_url();?>groups/addgroup" method="post">
-				Group Name: <input type="text" name="groupname"> Description: <input
-					type="text" name="description"> Caption: <input type="text"
-					name="caption">
-				<p></p>
-				<input type="submit" value="Create Group">
-			</form>
 		</div>
 	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+
+				<button>Create a Group</button>
+				<form action="<?php echo base_url();?>groups/addgroup" method="post">
+					Group Name: <input type="text" name="groupname"> Description: <input
+						type="text" name="description"> Caption: <input type="text"
+						name="caption">
+					<p></p>
+					<input type="submit" value="Create Group">
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
 	<?php $this->load->view('template/footer_scripts'); ?>
 	<!-- custom script -->
 	<script>
@@ -46,5 +56,6 @@ $this->load->view('template/header_files',$data);
 		}
 		);
 		</script>
+
 </body>
 </html>

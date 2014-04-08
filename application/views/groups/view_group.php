@@ -51,7 +51,6 @@ print "<p>".$member['first']."</p>";
 				<input type="hidden" name='memberemail' value="<?php echo $email;?>">
 				<input type="submit" value="Join Group!">
 			</form>
-			</p>
 
 
 			<?php $this->load->view('template/footer_scripts'); ?>

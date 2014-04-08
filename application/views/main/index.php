@@ -19,13 +19,15 @@ $this->load->view('template/header_files',$data);
 
 <body>
 
-
 	<?php $this->load->view('template/navbar');?>
 
 	<div class="container">
 		<div class="jumbotron">
 			<h1>Welcome to Better Bracket</h1>
 		</div>
+	</div>
+
+	<div class="container">
 
 		<div class="row">
 			<div class="col-md-12">
@@ -62,7 +64,7 @@ $this->load->view('template/header_files',$data);
 
 	<!-- /container -->
 
-<?php $this->load->view('template/footer_scripts'); ?>
+	<?php $this->load->view('template/footer_scripts'); ?>
 
 
 </body>

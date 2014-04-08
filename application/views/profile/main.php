@@ -30,8 +30,7 @@ $this->load->view('template/header_files',$data);
 
 		<div class="row">
 			<div class="col-md-8">
-				<img alt=""
-					src="http://leadersinheels.com/wp-content/uploads/facebook-default.jpg">
+				<img src="<?php echo base_url("/assets/images/missing.jpg"); ?>" />
 			</div>
 			<div class="col-md-4">
 				<h2>Name</h2>
@@ -52,8 +51,6 @@ $this->load->view('template/header_files',$data);
 
 		</div>
 		<!--/row-->
-	</div>
-
 	</div>
 
 
