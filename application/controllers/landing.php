@@ -66,7 +66,7 @@ class Landing extends CI_Controller {
 				$this->load->model('Profile_model');
 
 
-				$result = $this->Profile_model->create(array($uid, $first), array('user_id','first'));
+				$result = $this->Profile_model->create(array($uid, $first, $last), array('user_id','first','last'));
 				if(	!$result ){
 					echo "<h1>There was error creating user profile.</h1>";
 				}

@@ -81,6 +81,7 @@ body {
 	</div>
 	<!-- /container -->
 
+	<?php $this->load->view('template/footer_scripts'); ?>
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

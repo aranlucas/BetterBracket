@@ -69,6 +69,7 @@ print "</table>";
 ?>
 		</div>
 	</div>
+	<?php $this->load->view('template/footer_scripts'); ?>
 
 </body>
 </html>

@@ -5,13 +5,13 @@
 
 
 <html lang="en">
-	<head>
-		<?php
-		$data['title'] = " BB : Create a Group";
-		$this->load->view('template/header_files',$data);
-		?>
+<head>
+<?php
+$data['title'] = " BB : Create a Group";
+$this->load->view('template/header_files',$data);
+?>
 
-	</head>
+</head>
 
 <body>
 	<?php $this->load->view('template/navbar');?>
@@ -22,7 +22,7 @@
 			<?php if(isset($_POST['groupname'])){
 				echo "<p><b>You made a group!</b></p>";
 }?>
-			<h3>Create a Group</h3>
+			<h1>Create a Group</h1>
 
 			<button>Create a Group</button>
 			<form action="<?php echo base_url();?>groups/addgroup" method="post">
@@ -34,9 +34,9 @@
 			</form>
 		</div>
 	</div>
-<?php $this->load->view('template/footer_scripts'); ?>
-<!-- custom script -->
-<script>
+	<?php $this->load->view('template/footer_scripts'); ?>
+	<!-- custom script -->
+	<script>
 		$(document).ready(
 		function(){
 		  $('form').hide()
