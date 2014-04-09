@@ -77,7 +77,7 @@ class Bracket {
 			echo $this->div_close();
 		}
 		$champ_box  = $this->div_open("champ", "team");
-		$champ_box .= '<strong class="seed"></strong> '."\n".'<p class="team_name"></p>';
+		$champ_box .= '<strong class="seed"></strong> '."\n".'<p class="team_name"></p>'.'<div class="hidden team_id"></div>';
 		$champ_box .= $this->div_close().'<p class="caption">Champion</p>';
 
 		echo $this->div(false,"champion",$champ_box);
@@ -101,19 +101,7 @@ class Bracket {
 			for($t=1; $t <= $team_num; $t++) {
 				echo '<a href="#">';
 				if($this->create) {
-					if($round == 1) {
-						$this->team($region, $round, $g, $t);
-					}
-					else {
-						/*region-round-game-team-team-id*/
-						$identifier = $region.'-'.$round.'-'.$g.'-'.$t;
-					     //team              
-						echo $this->div_open($identifier, "team");
-							echo '<strong class="seed"></strong> ';
-					        echo '<p class="team_name"></p>';
-					                    
-						echo $this->div_close();
-					}
+					$this->team($region, $round, $g, $t);
 				}
 				else {
 
@@ -122,8 +110,7 @@ class Bracket {
 				     //team              
 					echo $this->div_open(false, "team ".$identifier);
 						echo '<strong class="seed"></strong> ';
-				        echo '<p class="team_name"></p>';
-				                    
+				        echo '<p class="team_name"></p>';       
 					echo $this->div_close();
 				}
 				echo '</a>';
@@ -141,25 +128,21 @@ class Bracket {
 		$identifier = $region.'-'.$round.'-'.$game.'-'.$team;
 		$seed = '';
 		$name = '';
+		$id   = '';
 
 		if(isset($this->bracket_data[$region][$round][$game][$team-1]))
 		{
 			$info = $this->bracket_data[$region][$round][$game][$team-1];
 			$seed = $info['seed'];
 			$name = $info['team_name'];
-		}
-		else {
-			echo '<pre>';
-			var_dump($identifier);
-			echo '</pre>';
+			$id   = $info['team_id'];
 		}
 
-		if($team_id != false) {
-		}
 	     //team   
 		echo $this->div_open($identifier, "team");
 		echo '<strong class="seed">'.$seed.'</strong> ';
 	    echo '<p class="team_name">'.$name.'</p>';
+		echo '<div class="hidden team_id">'.$id.'</div>';  
 	                    
 		echo $this->div_close();
 	}

@@ -92,9 +92,12 @@ CREATE TABLE picks
 (
   id integer NOT NULL DEFAULT nextval('pick_id_seq'),
   user_id INTEGER,
-  game_id INTEGER,
-  pick SMALLINT,
-  week SMALLINT,
+  group_id INTEGER,
+  team_id INTEGER,
+  region SMALLINT,
+  round SMALLINT,
+  game SMALLINT,
+  team SMALLINT,
   CONSTRAINT picks_table_pkey PRIMARY KEY (user_id)
 );
 ALTER SEQUENCE pick_id_seq OWNED BY picks.id;

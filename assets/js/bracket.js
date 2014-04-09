@@ -1,18 +1,38 @@
+var picks = new Object();
 
 
 $( document ).ready(function() {
 
+	$('.submit-picks').on("click", function(event) {
+		event.preventDefault();
+		out(Object.keys(picks).length);
+		out(JSON.stringify(picks));
+		post = [];
+		input = {};
+		input.name = "picks";
+		input.value = JSON.stringify(picks);
+		post.push(input);
+		var ajaxObj = ajax("http://localhost/BetterBracket/groups/create_bracket", post);
+    	ajaxObj.success(function(data){
+            //var results = JSON.parse(data);
+            out(data);
+			return true;
+    	});
+
+
+	});
 	$('.bracket a').on("click", function(event) {
 		event.preventDefault();
 		//out($(this));
 		//get game info
 		// out($(this).parent());
-		info = $(".team",this).attr("id").split("-");
-		region = info[0];
-		round = info[1];
-		game = info[2];
-		team_id = info[3];
-		seed = $(".seed",this).text();
+		info      = $(".team",this).attr("id").split("-");
+		region    = info[0];
+		round     = info[1];
+		game      = info[2];
+		team      = info[3];
+		team_id   = $(".team_id",this).text();
+		seed      = $(".seed",this).text();
 		team_name = $(".team_name",this).text();
 		//out(seed+team_name);
 		if(round <= 5) {
@@ -20,6 +40,7 @@ $( document ).ready(function() {
 			next_game.id = team_id;
 			next_game.team_name = team_name;
 			next_game.seed = seed;
+			next_game.champ = false;
 			//out(next_game)
 			fill_game(next_game);
 		}
@@ -28,16 +49,28 @@ $( document ).ready(function() {
 			next_game.id = team_id;
 			next_game.team_name = team_name;
 			next_game.seed = seed;
+			next_game.champ = true;
 			fill_champ(next_game);
 		}
+		add_pick(next_game);
 		
 	});
 
 });
+function add_pick(details){
+	
+	if(next_game.champ)
+		id = "5-1-1-1";
+	else
+		id = details.region+"-"+details.round +"-"+details.game+"-"+details.team;
+	picks[id] = team_id;
+	
+}
 function fill_champ(details) {
 	var new_game = $('#champ');
 	$(".seed",new_game).text(details.seed);
 	$(".team_name",new_game).text(details.team_name);
+	$(".team_id",new_game).text(details.id);
 }
 
 function fill_game(details) {
@@ -46,6 +79,7 @@ function fill_game(details) {
 	var new_game = $('#'+id);
 	$(".seed",new_game).text(details.seed);
 	$(".team_name",new_game).text(details.team_name);
+	$(".team_id",new_game).text(details.id);
 }
 
 function get_game(region, round, game) {
@@ -75,4 +109,23 @@ function get_game(region, round, game) {
 
 function out(data){
 	console.log(data);
+}
+
+
+function ajax(location, post_data) {
+	var tmp = post_data;
+	if(typeof tmp === 'object') {
+		if(typeof tmp[0] === 'object') {
+			var input = {};
+			input.name = "ajax";
+			input.value = true;
+			post_data.push(input);
+		}
+		else post_data.ajax = true;
+	}
+	return $.post(location, post_data, function(response) {
+		//set_response(response);
+		// out(response);
+		return true;
+	});
 }

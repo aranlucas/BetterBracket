@@ -7,7 +7,7 @@
 .bracket .champion {
   display: block;
   position: absolute;
-  top: 400px;
+  top: 650px;
   left: 50%;
   text-align: center;
   margin-left: -100px;
@@ -60,4 +60,7 @@
 .bracket .team_name {
   display: inline;
   margin: 0 2px;
+}
+.picks-button {
+  margin: 20px;
 }

@@ -17,17 +17,29 @@ class Groups extends CI_Controller {
 	}
 
 	public function create_bracket() {
-		$this->load->model('Group_model');
+
+		if(isset($_POST['ajax'])) {
+			$picks = json_decode($_POST['picks'],TRUE);
+			echo '<pre>';
+			var_dump($picks);
+			echo '</pre>';
+			//BUILD picks for submitting
+			//
+
+		}
+		else {
+			$this->load->model('Group_model');
 
 
-		$result = $this->Group_model->get_bracket();
+			$result = $this->Group_model->get_bracket();
 
-		$data['bracket_data'] = $result;
+			$data['bracket_data'] = $result;
 
 
-		$this->load->library('bracket', array('bracket_data' => $result,'create'=>true));
-		$data['bracket']	  = $this->bracket;
-		$this->load->view('groups/create_bracket',$data);
+			$this->load->library('bracket', array('bracket_data' => $result,'create'=>true));
+			$data['bracket']	  = $this->bracket;
+			$this->load->view('groups/create_bracket',$data);
+		}
 	}
 
 	function viewyourgroups()
