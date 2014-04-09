@@ -19,12 +19,14 @@ class Groups extends CI_Controller {
 	public function create_bracket() {
 		$this->load->model('Group_model');
 
-		$regions = array("south"=>1,"west"=>2,"east"=>3, "midwest"=>4);
+
 		$result = $this->Group_model->get_bracket();
-		foreach($result as $row){
-			$bracket[$regions[$row['region']]][$row['seed']] = $row;
-		}
-		$data['bracket'] = $bracket;
+
+		$data['bracket_data'] = $result;
+
+
+		$this->load->library('bracket', array('bracket_data' => $result,'create'=>true));
+		$data['bracket']	  = $this->bracket;
 		$this->load->view('groups/create_bracket',$data);
 	}
 

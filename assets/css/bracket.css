@@ -4,36 +4,60 @@
   margin: 0;
   color: #eee;
 }
+.bracket .champion {
+  display: block;
+  position: absolute;
+  top: 400px;
+  left: 50%;
+  text-align: center;
+  margin-left: -100px;
+  width: 200px;
+  font-size: 1.5em;
+  color: #18BC9C;
+}
+.bracket .champion .caption {
+  color: #eee;
+  border-top: 2px solid #9c9c9c;
+  font-size: .9em;
+}
+.bracket .region {
+  padding: 0;
+}
+.bracket .region .region_title {
+  display: block;
+  position: absolute;
+  top: 172px;
+}
 .bracket .round {
   /*background-color:red;*/
   padding: 0px;
 }
-.bracket .round .game {
+.bracket .game {
   border: 1px solid #9c9c9c;
   height: 50px;
   margin-top: 2px;
 }
-.bracket .round .split-game {
+.bracket .split-game {
   border: 1px solid #9c9c9c;
   height: 25px;
 }
-.bracket .round .team {
+.bracket .team {
   height: 25px;
 }
-.bracket .round .filler-game {
+.bracket .filler-game {
   height: 50px;
   display: block;
 }
-.bracket .round .filler-half {
+.bracket .filler-half {
   height: 25px;
   display: block;
 }
-.bracket .round .filler100 {
+.bracket .filler100 {
   height: 100px;
   float: left;
 }
-.bracket .round .seed,
-.bracket .round .team_name {
+.bracket .seed,
+.bracket .team_name {
   display: inline;
   margin: 0 2px;
 }
